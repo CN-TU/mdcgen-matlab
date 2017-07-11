@@ -41,6 +41,7 @@ function [ r ] = mdcgen( p, dtb )
 %   rot: cluster rotation
 %   out: number of outliers
 %   Nnoise: noisy dimensions.
+%   validity: type of validity indices 'all', 'Silhouette', 'G-indices'
 %
 % dtb. 
 %   n: number of additional distributions
@@ -70,6 +71,12 @@ if isfield(p,'scale')==0, p.scale= 1;end
 if isfield(p,'out')==0, p.out= 50;end
 if isfield(p,'rot')==0, p.rot= 0;end
 if isfield(p,'Nnoise')==0, p.Nnoise= 0;end
+if isfield(p,'validity')==0 
+    p.validity.Silhouette=0;
+    p.validity.Gindices=0;
+end
+if isfield(p.validity,'Silhouette')==0,  p.validity.Silhouette=0;end
+if isfield(p.validity,'Gindices')==0, p.validity.Gindices=0; end 
 if exist('dtb')==0, dtb=[];end
 if isfield(dtb,'n')==0, dtb.n= 0;end
 
@@ -91,9 +98,8 @@ rot=p.rot;
 Nnoise=p.Nnoise;
 kicoeff=3;
 
-addpath(genpath('../validity'));
+addpath(genpath('extra_tools'));
 % -------------- Checking code from third parties
-addpath(genpath('nearestSPD'));
 if (sum(corr)>0 && exist('nearestSPD')==0)
     error('"nearestSPD" is required to implement feature correlations. Download it for free from: https://de.mathworks.com/matlabcentral/fileexchange/42885-nearestspd');
 end
@@ -244,16 +250,15 @@ for i=1:k
         c(i,j)=mod(res,cmax(j))+1;
         res=floor(res/cmax(j));   
         c(i,j)=c(i,j)/(cmax(j)+1);
-        c(i,j)=c(i,j)+(rand()-0.5)*cp(i);
+        c(i,j)=c(i,j)+(rand()-0.5);%*cp(i);
     end
     if N>ind
         for j=(ind+1):N
              c(i,j)=floor(cmax(j)*rand()+1)/(cmax(j)+1);
-             c(i,j)=c(i,j)+(rand()-0.5)*cp(i);
+             c(i,j)=c(i,j)+(rand()-0.5);%*cp(i);
         end
     end
 end
-%c=c.*(1/(cmax+1));
 
 
 MN=[];label=[];
@@ -427,8 +432,8 @@ end
 
 r.MN=MN;
 r.label=label;
-[ r.perf ] = Gvalidity(k,Edmx,mdDa,mnDa,sdDa,mass);
-r.perf.Silhouette=mean(silhouette(MN,label,'Euclidean'));
+if (p.validity.Gindices), [ r.perf ] = Gvalidity(k,Edmx,mdDa,mnDa,sdDa,mass); end
+if (p.validity.Silhouette), r.perf.Silhouette=mean(silhouette(MN,label,'Euclidean')); end
 
 end
 

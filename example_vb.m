@@ -1,5 +1,5 @@
 
-%-- MDC_GENERATOR v1.0, example of peterization
+%-- MDC_GENERATOR v2.0, example of parameterization
 
 fprintf('----------- execute example ------------\n');
 fprintf('example_vb;\n');
@@ -45,6 +45,13 @@ p.d = 0; % (scalar) it affects all distributions
 % p.dflag = 1; % (scalar) it affects all distributions
 %-- p.dflag = [0, 1, 1, 0, 0, 0]; % (1x6-array) it enables distributions
 %-- independently. '0' disabled, '1' enabled.
+
+% If additional distributions are added as input parameters (i.e., '[ r ] = mdcgen( p, dist );' ),
+% the new distributions take indices starting at '7' for the configuration of 'd' and 'dflag' parameters. 
+% For example, if 'dist' embeds with 2 distributions ('dist.n=2'), 'dist.d(1)' and 'dist.d(2)' are 
+% respectivelygets linked to indices '7' and '8' for the configuration of 'd' and 'dflag'
+
+
 
 %--  mv: multivariate distributions or distributions defining
 %--  intra-distances (scalar, array)
@@ -92,12 +99,16 @@ p.out = 50;
 % p.Nnoise= [0, 0, 1, 2, 0, 3; 1, 0, 2, 0, 0, 0]; % (matrix) k columns, (i,j)-values
 % state which dimensions mus be noisy for the j-cluster
 
+%-- validity: type of validity performance (to check generated overlap)
+p.validity.Silhouette=1;
+p.validity.Gindices=1;
 
 % ----------- outputs ----------- 
 % result.
 %   MN: output matrix
 %   label: array with labels
 %   perf: performance 
+%       perf.Silhouette: global Silhouette index
 %       perf.Gstr: strict global overlap index
 %       perf.Grex: relaxed global overlap index
 %       perf.Gmin: minimum global overlap index

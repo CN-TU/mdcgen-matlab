@@ -13,3 +13,4 @@ p.scale=1;
 p.out=0;
 p.rot=0;
 p.Nnoise=0;
+p.validity.Silhouette=1;
