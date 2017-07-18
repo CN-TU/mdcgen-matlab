@@ -98,7 +98,7 @@ rot=p.rot;
 Nnoise=p.Nnoise;
 kicoeff=3;
 
-addpath('extra_tools');
+addpath(genpath('extra_tools'))
 % -------------- Checking code from third parties
 if (sum(corr)>0 && exist('nearestSPD')==0)
     error('"nearestSPD" is required to implement feature correlations. Download it for free from: https://de.mathworks.com/matlabcentral/fileexchange/42885-nearestspd');
