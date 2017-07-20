@@ -236,7 +236,7 @@ aux=cmax(1);
 ind=2;
 for i=ind:N
     aux=cmax(i)*aux;
-    if aux>(2*k+out/k)
+    if aux>(2*k+2*out/k)
         ind=i; break; 
     end
 end
@@ -250,12 +250,14 @@ for i=1:k
         c(i,j)=mod(res,cmax(j))+1;
         res=floor(res/cmax(j));   
         c(i,j)=c(i,j)/(cmax(j)+1);
-        c(i,j)=c(i,j)+(rand()-0.5);%*cp(i);
+        %c(i,j)=c(i,j)+(rand()-0.5);%*cp(i);
+        c(i,j)=c(i,j)*(1+normrnd(0,cp(i)));%*cp(i);
     end
     if N>ind
         for j=(ind+1):N
              c(i,j)=floor(cmax(j)*rand()+1)/(cmax(j)+1);
-             c(i,j)=c(i,j)+(rand()-0.5);%*cp(i);
+             %c(i,j)=c(i,j)+(rand()-0.5);%*cp(i);
+             c(i,j)=c(i,j)*(1+normrnd(0,cp(i)));%*cp(i);             
         end
     end
 end
@@ -400,15 +402,19 @@ if out>0
             s(1,j)=mod(res,cmax(j))+1;
             res=floor(res/cmax(j));
             s(1,j)=s(1,j)/(cmax(j)+1);
-            aux(1,j)=(1/(cmax(j)+1))*rand()-(1/(2*(cmax(j)+1)));
+%            aux(1,j)=(1/(cmax(j)+1))*rand()-(1/(2*(cmax(j)+1)));
+            %aux(1,j)=(1/(cmax(j)+1))*normrnd(0,0.01);
+            s(1,j)=s(1,j)*(1+normrnd(0,0.1));
         end
         if N>ind
             for j=(ind+1):N
                  s(1,j)=floor(cmax(j)*rand()+1)/(cmax(j)+1);
-                 aux(1,j)=(1/(cmax(j)+1))*rand()-(1/(2*(cmax(j)+1)));
+                 %aux(1,j)=(1/(cmax(j)+1))*rand()-(1/(2*(cmax(j)+1)));
+                 %aux(1,j)=(1/(cmax(j)+1))*normrnd(0,0.01);
+                 s(1,j)=s(1,j)*(1+normrnd(0,0.1));
             end
         end
-        No(i,:)=s+aux;
+        No(i,:)=s;%+aux;
         l=l+1;
         if (l>length(locis)), l=1;end
     end
