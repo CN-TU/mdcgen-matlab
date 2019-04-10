@@ -3,7 +3,7 @@ Generator of synthetic n-dimensional datasets for the evaluation of clustering a
 detection algorithms (MATLAB version)
 
 - Jul 2017, created (v1), FIV
-- Mar 2019, fixed bugs, optmized (v2), DO 
+- Mar 2019, fixed bugs, stress testing, and optmized (v2), DO 
 
 ## How to start...
 Open MATLAB. From the [mdcgen] folder run:
