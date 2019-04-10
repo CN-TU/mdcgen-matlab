@@ -7,7 +7,8 @@ Created (v1): Félix Iglesias (felix.iglesas(at)nt.tuwien.ac.at), Jul 2017
 Fixed and optmized (v2): Denis Ojdanic (denis.ojdanic(at)yahoo.com), Mar 2019 
 
 ## How to start...
-Open MATLAB and run "mdc_help" from the working folder
+Open MATLAB. From the [mdcgen] folder run:
+> mdc_help 
 
 ## References 
 F. Iglesias, T. Zseby, D Ferreira, A. Zimeck. MDCGen: Multidimensional Dataset Generator for
