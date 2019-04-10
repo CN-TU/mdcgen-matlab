@@ -1,16 +1,20 @@
 # mdcgen-matlab
-Generator of synthetic n-dimensional datasets for clustering (MATLAB version)
+Generator of synthetic n-dimensional datasets for the evaluation of clustering and outlier
+detection algorithms (MATLAB version)
 
-## Files:
-* _example.m_, quick parameterization example.
-* _example_vb.m_, verbose parameterization example (since docu is pending, this works as kinda tutorial).
-* _mdcgen.m_, MDCGen tool, "[r] = mdcgen (p)".
-* _extra_tools/dist_gen.m_, Generator of empirical distributions.
-* _extra_tools/Gvalidity.m_, Gvalidity indices for cluster overlap evaluation.
+Created (v1): Félix Iglesias (felix.iglesas(at)nt.tuwien.ac.at), Jul 2017
 
+Fixed and optmized (v2): Denis Ojdanic (denis.ojdanic(at)yahoo.com), Mar 2019 
 
-"nearestSPD" is required to implement feature correlations. 
+## How to start...
+Open MATLAB and run "mdc_help" from the working folder
+
+## References 
+F. Iglesias, T. Zseby, D Ferreira, A. Zimeck. MDCGen: Multidimensional Dataset Generator for
+Clustering. Journal of Classification (pending publication), 2019
+
+## Dependencies
+"nearestSPD" is required to implement feature correlations (in case you use such functionality). 
 You can download it for free from: https://de.mathworks.com/matlabcentral/fileexchange/42885-nearestspd
 
 
-FIV, Jul 2017
