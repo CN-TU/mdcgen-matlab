@@ -2,8 +2,8 @@
 Generator of synthetic n-dimensional datasets for the evaluation of clustering and outlier
 detection algorithms (MATLAB version)
 
-* Created (v1): Félix Iglesias (felix.iglesas(at)nt.tuwien.ac.at), Jul 2017
-* Fixed bugs and optmized (v2): Denis Ojdanic (denis.ojdanic(at)yahoo.com), Mar 2019 
+Jul 2017, created (v1): Félix Iglesias (felix.iglesas@nt.tuwien.ac.at)
+Mar 2019, fixed bugs, optmized (v2): Denis Ojdanic (denis.ojdanic@yahoo.com) 
 
 ## How to start...
 Open MATLAB. From the [mdcgen] folder run:
