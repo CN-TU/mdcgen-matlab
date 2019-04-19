@@ -17,7 +17,8 @@
 % Outputs:
 %   clusterPoints:      a matrix containing the cluster data points    
 %
-% Author: Denis Ojdanic
+% Author:     Denis Ojdanic <denis.ojdanic@yahoo.com>
+% Supervisor: Félix Iglesias Vázquez <felix.iglesias@nt.tuwien.ac.at>
 % Date: 20.03.2019
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 function [clusterPoints] = multivariateDistribution(cluster, pointsPerCluster, nDimensions, distribution, compactness, userDistributions)

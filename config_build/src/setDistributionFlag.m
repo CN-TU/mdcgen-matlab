@@ -15,7 +15,8 @@
 %                                  that are enabled are set to 1, the 
 %                                  disabled distributions to 0
 %
-% Author: Denis Ojdanic
+% Author:     Denis Ojdanic <denis.ojdanic@yahoo.com>
+% Supervisor: Félix Iglesias Vázquez <felix.iglesias@nt.tuwien.ac.at>
 % Date: 26.02.2019
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 

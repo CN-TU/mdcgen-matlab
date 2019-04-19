@@ -12,7 +12,8 @@
 % Outputs:
 %   correlation: An initialized array with the length equal to nClusters.
 %
-% Author: Denis Ojdanic
+% Author:     Denis Ojdanic <denis.ojdanic@yahoo.com>
+% Supervisor: Félix Iglesias Vázquez <felix.iglesias@nt.tuwien.ac.at>
 % Date: 26.02.2019
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 

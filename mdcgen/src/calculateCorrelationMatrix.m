@@ -1,5 +1,5 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
-% function [T, p] = calculateCorrelationMatrix(nDimensions,correlation, clusterNumber)
+% [T, p] = calculateCorrelationMatrix(nDimensions,correlation, clusterNumber)
 %
 % Description: This function calculates the correlation matrix
 %
@@ -12,7 +12,8 @@
 %   T:              cholcov matrix       
 %   p:              chol value
 %
-% Author: Denis Ojdanic
+% Author:     Denis Ojdanic <denis.ojdanic@yahoo.com>
+% Supervisor: Félix Iglesias Vázquez <felix.iglesias@nt.tuwien.ac.at>
 % Date: 14.03.2019
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 function [T, p] = calculateCorrelationMatrix(nDimensions,correlation, clusterNumber)

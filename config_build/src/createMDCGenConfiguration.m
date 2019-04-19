@@ -50,7 +50,8 @@
 %       validity:           type of validity indices 'all', 'Silhouette', 
 %                           'G-indices'
 %
-% Author: Denis Ojdanic
+% Author:     Denis Ojdanic <denis.ojdanic@yahoo.com>
+% Supervisor: Félix Iglesias Vázquez <felix.iglesias@nt.tuwien.ac.at>
 % Date: 16.02.2019
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 

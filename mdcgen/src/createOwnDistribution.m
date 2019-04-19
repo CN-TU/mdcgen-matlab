@@ -14,7 +14,8 @@
 %   distributedPoints: points distributed according to the user defined
 %                      distribution
 %
-% Author: Denis Ojdanic
+% Author:     Denis Ojdanic <denis.ojdanic@yahoo.com>
+% Supervisor: Félix Iglesias Vázquez <felix.iglesias@nt.tuwien.ac.at>
 % Date: 08.03.2019
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 function [ distributedPoints ] = createOwnDistribution( distributionIndex, userDistribution, compactness, nPoints )

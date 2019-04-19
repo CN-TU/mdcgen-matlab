@@ -19,7 +19,8 @@
 %   dimensionIndex:     index of main dimensions (other dimensions are 
 %                       assigned randomly)
 %
-% Author: Denis Ojdanic
+% Author:     Denis Ojdanic <denis.ojdanic@yahoo.com>
+% Supervisor: Félix Iglesias Vázquez <felix.iglesias@nt.tuwien.ac.at>
 % Date: 26.02.2019
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 function [centroids, intersectionIndex, dimensionIndex] = insertCentroids(nIntersections, dimensions, nClusters, nOutliers, compactness)

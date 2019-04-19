@@ -16,7 +16,8 @@
 %   pointsPerCluster: Array where each entry represents an cluster and the 
 %                     the value the number of datapoints per cluster          
 %
-% Author: Denis Ojdanic
+% Author:     Denis Ojdanic <denis.ojdanic@yahoo.com>
+% Supervisor: Félix Iglesias Vázquez <felix.iglesias@nt.tuwien.ac.at>
 % Date: 20.02.2019
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 function [pointsPerCluster] = setClusterMass(nClusters, clusterMass, minimumClusterMass, nDatapoints)

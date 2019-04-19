@@ -16,7 +16,8 @@
 %   outliers: outlier coordinates in the solution space
 %   
 %
-% Author: Denis Ojdanic
+% Author:     Denis Ojdanic <denis.ojdanic@yahoo.com>
+% Supervisor: Félix Iglesias Vázquez <felix.iglesias@nt.tuwien.ac.at>
 % Date: 07.03.2019
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 function [outliers] = insertOutliers(intersectionIndex, dimensionIndex, nIntersections, nClusters, nOutliers, nDimensions)
