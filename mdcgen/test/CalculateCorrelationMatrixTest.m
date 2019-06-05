@@ -11,6 +11,10 @@ classdef CalculateCorrelationMatrixTest < matlab.unittest.TestCase
     
     methods (Test)
         function testCalculateCorrelationMatrix_A(testCase)
+            if exist('../../extra_tools/nearesSPD.m') == 0
+                testCase.assumeTrue(false, "Test skipped. Nearest SPD required for correlation feature and is not istalled." + newline ...
+                    + "You can download nearest SPD for free from: https://de.mathworks.com/matlabcentral/fileexchange/42885-nearestspd ");
+            end
             nDimensions = 2;
             correlation = [0.674, 0,123];
             clusterNumber = 2;
@@ -20,6 +24,10 @@ classdef CalculateCorrelationMatrixTest < matlab.unittest.TestCase
         end
         
         function testCalculateCorrelationMatrix_B(testCase)
+            if exist('../../extra_tools/nearestPD.m') == 0
+                testCase.assumeTrue(false, "Test skipped. Nearest SPD required for correlation feature and is not istalled." + newline ...
+                    + "You can download nearest SPD for free from: https://de.mathworks.com/matlabcentral/fileexchange/42885-nearestspd ");
+            end
             nDimensions = 2;
             correlation = [0.674, -0,123];
             clusterNumber = 1;
