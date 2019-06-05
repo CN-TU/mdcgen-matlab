@@ -3,7 +3,6 @@ classdef MDCGenTest < matlab.unittest.TestCase
     
     properties
         params;
-        config;
         result;
         referenceResult;
     end
@@ -28,12 +27,10 @@ classdef MDCGenTest < matlab.unittest.TestCase
         %%% R001 %%%
         function testReproduceDataSet(this)
             givenSeedIsSetTo(18, this);
-            givenMDCGenConfigIsCreated(this);
             givenMDCGenIsCalled(this);
             this.referenceResult = this.result;
             
             givenSeedIsSetTo(18, this);
-            givenMDCGenConfigIsCreated(this);
             whenMDCGenIsCalled(this);
             thenOutputDatasetsAreEqual(this);
         end
@@ -41,7 +38,6 @@ classdef MDCGenTest < matlab.unittest.TestCase
         %%% R002 %%%
         function testDataSetDimensions(this)
             givenDimensionIsSetTo(100, this);
-            givenMDCGenConfigIsCreated(this);
             whenMDCGenIsCalled(this);
             thenOutputDatasetDimensionShoudBe(100, this);   
         end
@@ -51,7 +47,6 @@ classdef MDCGenTest < matlab.unittest.TestCase
         function testNumberDataPoints(this)
             givenNDatapointsIsSetTo(300, this);
             givenNOutliersIsSetTo(0, this);
-            givenMDCGenConfigIsCreated(this);
             whenMDCGenIsCalled(this);
             thenOutputDatasetNPointsShoudBe(300, this);   
         end
@@ -61,7 +56,6 @@ classdef MDCGenTest < matlab.unittest.TestCase
         function testNumberOfOutliers(this)
             givenNOutliersIsSetTo(5, this);
             givenNDatapointsIsSetTo(100, this);
-            givenMDCGenConfigIsCreated(this);
             whenMDCGenIsCalled(this);
             thenOutputDatasetNPointsShoudBe(105, this);
             thenNumberOfLabeledOutliersShouldBe(5, this);
@@ -71,7 +65,6 @@ classdef MDCGenTest < matlab.unittest.TestCase
         %%% R018 %%%
         function testNumberOfClusters(this)
             givenNClustersIsSetTo(5, this);
-            givenMDCGenConfigIsCreated(this);
             whenMDCGenIsCalled(this);
             thenNumberOfLabeledClustersShouldBe(5, this);
         end
@@ -81,7 +74,6 @@ classdef MDCGenTest < matlab.unittest.TestCase
             givenNDatapointsIsSetTo(50, this);
             givenNClustersIsSetTo(3, this);
             givenClusterMassIsSetTo([10,20,20], this);
-            givenMDCGenConfigIsCreated(this);
             whenMDCGenIsCalled(this);
             thenClusterMassShouldBe([10, 20, 20], this);       
         end
@@ -91,14 +83,11 @@ classdef MDCGenTest < matlab.unittest.TestCase
             givenNClustersIsSetTo(1, this);
             givenNOutliersIsSetTo(0,this);
             
-            givenMDCGenConfigIsCreated(this);
             givenMDCGenIsCalled(this);
             this.referenceResult = this.result;
             
             givenNoiseIsSetTo(2, this);
-            givenMDCGenConfigIsCreated(this);
             whenMDCGenIsCalled(this);
-            
             thenDimensionShouldBeNoisy(this);
         end
         
@@ -108,12 +97,10 @@ classdef MDCGenTest < matlab.unittest.TestCase
             givenNOutliersIsSetTo(0,this);
             givenNClustersIsSetTo(1, this);
 
-            givenMDCGenConfigIsCreated(this);
             givenMDCGenIsCalled(this);
             this.referenceResult = this.result;
 
-            givenRotationIsSetTo(1, this)
-            givenMDCGenConfigIsCreated(this);
+            givenRotationIsSetTo(1, this)         
             whenMDCGenIsCalled(this);
             thenClusterShouldBeRotated(this);
         end
@@ -124,8 +111,7 @@ classdef MDCGenTest < matlab.unittest.TestCase
             this.params.multivariate = -1;
             this.params.nDatapoints = 1000;
             this.params.compactness = [0.2, 0.25];
- 
-            givenMDCGenConfigIsCreated(this);
+             
             whenMDCGenIsCalled(this);
             thenClustersAreOverlapping(this);
         end
@@ -135,7 +121,7 @@ classdef MDCGenTest < matlab.unittest.TestCase
             this.params.validity.Silhouette=1;
             this.params.validity.Gindices=1;
  
-            givenMDCGenConfigIsCreated(this);
+            
             whenMDCGenIsCalled(this);
             thenValidityChecksShouldBeEnabled(this);
         end
@@ -159,6 +145,7 @@ classdef MDCGenTest < matlab.unittest.TestCase
         function givenClusterMassIsSetTo(mass, this)
             this.params.clusterMass = mass;
         end
+        
         function givenSeedIsSetTo(seed, this)
             this.params.seed = seed;
         end
@@ -178,16 +165,13 @@ classdef MDCGenTest < matlab.unittest.TestCase
         function givenDimensionIsSetTo(nDim, this)
             this.params.nDimensions = nDim;
         end
-        function givenMDCGenConfigIsCreated(this)
-            this.config = createMDCGenConfiguration(this.params);
-        end
         
         function givenMDCGenIsCalled(this)
            whenMDCGenIsCalled(this);
         end
         
         function whenMDCGenIsCalled(this)
-            this.result = mdcgen(this.config);
+            this.result = mdcgen(this.params);
         end
         
         function thenOutputDatasetNPointsShoudBe(nPoints, this)

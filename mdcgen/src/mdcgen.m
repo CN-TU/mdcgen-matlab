@@ -46,119 +46,36 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 
 
-function [ result ] = mdcgen( config )
+function [ result ] = mdcgen( p )
 
+% initialize mdcgen configuration
+c = createMDCGenConfiguration(p);
 
-nDatapoints      = config.nDatapoints;      
-nDimensions      = config.nDimensions;
-nOutliers        = config.nOutliers;
-pointsPerCluster = config.pointsPerCluster;
-distribution     = config.distribution;
-nClusters        = config.nClusters;
-multivariate     = config.multivariate;
-correlation      = config.correlation;
-compactness      = config.compactness;
-rotation         = config.rotation;
-nIntersections   = config.nIntersections;
-noise            = config.noise;
-noiseType        = config.noiseType;
+nDatapoints      = c.nDatapoints;      
+nDimensions      = c.nDimensions;
+nOutliers        = c.nOutliers;
+nClusters        = c.nClusters;
+compactness      = c.compactness;
+nIntersections   = c.nIntersections;
+noise            = c.noise;
+noiseType        = c.noiseType;
 
-nAvailableDistributions = config.nAvailableDistributions;
-indicesAvailableDistributions = config.indicesAvailableDistributions;
-
-userDistributions = config.userDistributions;
-
-
+% insert cluster centroids
 [centroids, intersectionIndex, dimensionIndex] = insertCentroids(nIntersections, nDimensions, nClusters, nOutliers, compactness);
 
-dataPoints = [];
-dataPointsLabel = []; 
-clusterLabel = 1; 
-
-medianStatistic = zeros(1, nClusters);
-meanStatistic = zeros(1, nClusters);
-standardDeviationStatistic = zeros(1, nClusters);
-
-for iCluster = 1 : nClusters
-    
-    if multivariate(iCluster) == 0 % multivariate or radial, choose randomly
-        multivariate(iCluster) = sign(rand()-0.5);
-    end     
-    
-    if multivariate(iCluster) > 0 % distributions define feature values (multivariate)
-       
-        for jDimension = 1 : nDimensions 
-            if distribution(jDimension, iCluster) == 0
-                distribution(jDimension, iCluster) = indicesAvailableDistributions( 1 + floor(nAvailableDistributions * rand()) );
-            end
-        end
-        clusterPoints = multivariateDistribution(iCluster,pointsPerCluster(iCluster), nDimensions, distribution, compactness(iCluster), userDistributions);
-        
-    else %mv(i)==-1                           %  distributions define intra-distances         
-        if distribution(1, iCluster) == 0
-            distribution(:,iCluster) = indicesAvailableDistributions( 1 + floor(nAvailableDistributions * rand()));
-        end
-        clusterPoints = radialBasedDistribution(iCluster,distribution, pointsPerCluster(iCluster), nDimensions, compactness(iCluster), userDistributions);
-    end
-   
-    % -------------- Calculating covariance matrix for cluster 'i'
-
-    if correlation(iCluster) ~= 0
-        [T, p] = calculateCorrelationMatrix(nDimensions,correlation, iCluster);
-
-        if p == 0
-            clusterPoints = clusterPoints * T;
-        end
-    end
-    
-    % -------------- Calculating rotation matrix for cluster 'i'
-    if (rotation(iCluster)) %random rotation
-        rotationMatrix = 2 * (rand(nDimensions) - 0.5);
-        rotationMatrix = orth(rotationMatrix);
-        [m,n] = size(rotationMatrix);
-        if m == n && n == nDimensions % 'rotM' keeps NxN dimensions
-            clusterPoints = clusterPoints * rotationMatrix;
-        end
-    end
-    
-    % -------------- Adding noisy variables
-    if strcmp(noiseType,'matrix') 
-        [m,~] = size(noise);
-        for jDimension = 1 : m
-            probabilityDistribution = makedist('Uniform','Lower',0,'Upper',1); 
-            noisePoints = random(probabilityDistribution, pointsPerCluster(iCluster), 1);
-            if (noise(jDimension, iCluster) > 0) 
-                clusterPoints(:, noise(jDimension,iCluster)) = noisePoints; 
-            end
-        end
-    end
-    
-    % -------------- Placing clusters in the output space
-    clusterPoints = bsxfun(@plus, clusterPoints,centroids(iCluster,:)); 
-    dataPoints = [dataPoints; clusterPoints];
-    
-    % -------------- Updating labels
-    iClusterLabel = ones(pointsPerCluster(iCluster), 1) * clusterLabel;
-    dataPointsLabel = [dataPointsLabel; iClusterLabel];
-    clusterLabel = clusterLabel + 1;
-    
-    % -------------- Saving intra-clust dist statistics
-    medianStatistic(iCluster) = median( pdist2(clusterPoints, centroids(iCluster,:)) );    
-    meanStatistic(iCluster) = mean( pdist2(clusterPoints, centroids(iCluster,:)) );  
-    standardDeviationStatistic(iCluster) = std( pdist2(clusterPoints, centroids(iCluster,:)) );  
-end
-
-interClusterDistance = dist(centroids');
+% create and insert cluster points 
+[ result, dataPoints, dataPointsLabel ] = insertClusterPoints( c, centroids );
 
 
+% create and insert outliers
 if nOutliers > 0
-    [outliers] = insertOutliers(intersectionIndex, dimensionIndex, nIntersections, nClusters, nOutliers, nDimensions);
+    outliers = insertOutliers(intersectionIndex, dimensionIndex, nIntersections, nClusters, nOutliers, nDimensions);
     dataPoints = [dataPoints; outliers];
     outliersLabel = zeros(nOutliers, 1);
     dataPointsLabel = [dataPointsLabel; outliersLabel];
 end
 
-
+% insert noise
 if strcmp(noiseType,'array') %array
     [~,n]=size(noise);
     for iCluster = 1 : n
@@ -174,15 +91,11 @@ end
 result.dataPoints = dataPoints;
 result.label = dataPointsLabel;
 
-if (config.validity.Gindices)
-    addpath(genpath('../../extra_tools'));
-    [ result.perf ] = Gvalidity(nClusters, interClusterDistance, medianStatistic, meanStatistic, standardDeviationStatistic, pointsPerCluster); 
-end
 
-if (config.validity.Silhouette)
+% validation
+if (c.validity.Silhouette)
     result.perf.Silhouette = mean( silhouette(dataPoints, dataPointsLabel,'Euclidean') ); 
 end
-
 end
 
 
