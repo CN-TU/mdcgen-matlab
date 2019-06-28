@@ -11,7 +11,8 @@ Open MATLAB. From the [mdcgen] folder run:
 
 ## References 
 F. Iglesias, T. Zseby, D Ferreira, A. Zimeck. *MDCGen: Multidimensional Dataset Generator for
-Clustering*. Journal of Classification (pending publication), 2019
+Clustering*. Journal of Classification. pp. 1-20, doi: 10.1007/s00357-019-9312-3. (2019).
+https://link.springer.com/article/10.1007/s00357-019-9312-3
 
 ## Dependencies
 "nearestSPD" is required to implement feature correlations (in case you use such functionality). 
