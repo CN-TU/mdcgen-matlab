@@ -242,8 +242,8 @@ classdef MDCGenTest < matlab.unittest.TestCase
         end
         
         function thenValidityChecksShouldBeEnabled(this)
-            this.verifyEqual(this.result.perf.Silhouette, 0.854, 'RelTol', 0.1, "Silhouette does not match");    
-            this.verifyEqual(this.result.perf.Gstr, 3.661, 'RelTol', 0.1, "Gindices does not match");    
+            this.verifyEqual(this.result.mdcPerf.Silhouette, 0.854, 'RelTol', 0.1, "Silhouette does not match");    
+            this.verifyEqual(this.result.mdcPerf.Gstr, 3.661, 'RelTol', 0.1, "Gindices does not match");    
         end
         
         function result = verifyClusterIsBigger(this)
