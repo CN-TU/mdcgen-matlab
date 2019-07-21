@@ -151,7 +151,7 @@ interClusterDistance = dist(centroids');
 result = [];
 if (config.validity.Gindices)
     addpath(genpath('../../extra_tools'));
-    result.perf = Gvalidity(nClusters, interClusterDistance, medianStatistic, meanStatistic, standardDeviationStatistic, pointsPerCluster); 
+	result.mdcPerf = Gvalidity(nClusters, interClusterDistance, medianStatistic, meanStatistic, standardDeviationStatistic, pointsPerCluster); 
 end
 
 

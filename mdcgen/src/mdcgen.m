@@ -94,7 +94,7 @@ result.label = dataPointsLabel;
 
 % validation
 if (c.validity.Silhouette)
-    result.perf.Silhouette = mean( silhouette(dataPoints, dataPointsLabel,'Euclidean') ); 
+    result.mdcPerf.Silhouette = mean( silhouette(dataPoints, dataPointsLabel,'Euclidean') ); 
 end
 end
 
