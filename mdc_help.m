@@ -12,13 +12,14 @@ switch input
         fprintf("warning('backtrace', 'off');                                     \n\n");
         fprintf("addpath(genpath('config_build/src/'));                             \n");
         fprintf("addpath(genpath('mdcgen/src'));                                  \n\n");
+        fprintf("config.seed = 15;                                                 \n");
         fprintf("config.nDatapoints = 2000;                                         \n");
         fprintf("config.nDimensions = 2;                                            \n");
         fprintf("config.nClusters = 3;                                              \n");
-        fprintf("config.nOutliers = 4;                                              \n");
+        fprintf("config.nOutliers = 10;                                              \n");
         fprintf("config.distribution = [6 1 2];                                   \n\n");
         fprintf('[ result ] = mdcgen( config );                                   \n\n');
-        fprintf("scatter(result.dataPoints(:,1),result.dataPoints(:,2),10,'fill');  \n");
+        fprintf("scatter(result.dataPoints(:,1),result.dataPoints(:,2),5,result.label,'fill');  \n");
         fprintf('axis([0 1 0 1])                                                    \n');
         fprintf('\n-------------------- configuration example end ------------------\n\n');
         
