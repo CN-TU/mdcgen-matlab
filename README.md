@@ -8,8 +8,9 @@ detection algorithms (MATLAB version)
 ## How to start...
 Open MATLAB. From the [mdcgen] folder run:
 > mdc_help 
+
 or, for a quick example, run:
-> mdc_help 
+> mdcgen_example 
 
 ## References 
 F. Iglesias, T. Zseby, D Ferreira, A. Zimeck. *MDCGen: Multidimensional Dataset Generator for
